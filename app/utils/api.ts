@@ -1,6 +1,5 @@
 export const strapiUrl = process.env.STRAPI_URL;
 
-
 const fetchData = async (url: string) => {
   try {
     const response = await fetch(url, {
@@ -17,27 +16,25 @@ const fetchData = async (url: string) => {
 
 export const getNavData = async () => {
   const navData = await fetchData(
-    `${process.env.STRAPI_URL}/api/navigation?populate=deep`
+    `${process.env.STRAPI_URL}/api/navigation?pLevel`
   );
   return flattenAttributes(navData);
 };
 
 export const getContactData = async () => {
   const contactData = await fetchData(
-    `${process.env.STRAPI_URL}/api/contact-info?populate=deep`
+    `${process.env.STRAPI_URL}/api/contact-info?pLevel`
   );
   return flattenAttributes(contactData);
 };
 
 export const getPages = async () => {
-  const pages = await fetchData(
-    `${process.env.STRAPI_URL}/api/pages?populate=deep`
-  );
+  const pages = await fetchData(`${process.env.STRAPI_URL}/api/pages?pLevel`);
   return flattenAttributes(pages);
 };
 
 export const getFacultyData = async () => {
-  const facultyData = await fetchData(`${strapiUrl}/api/faculties?populate=deep`);
+  const facultyData = await fetchData(`${strapiUrl}/api/faculties?pLevel`);
   return facultyData.data.map((item: any) => flattenAttributes(item));
 };
 
@@ -46,7 +43,7 @@ export const getPageBySlug = async (slug: string) => {
   const response = await fetchData(
     `${process.env.STRAPI_URL}/api/pages?filters[Slug][$eq]=${
       slugParts[slugParts.length - 1]
-    }&populate=deep`
+    }&pLevel`
   );
 
   if (!response || !response.data || !Array.isArray(response.data)) {

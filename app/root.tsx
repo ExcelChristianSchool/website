@@ -21,6 +21,7 @@ export async function loader() {
     getContactData(),
     getPages(),
   ]);
+  console.log({ contactInfo, pageData });
   console.log(process.env.STRAPI_URL);
   return json({
     contactInfo,

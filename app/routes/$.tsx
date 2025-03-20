@@ -20,6 +20,7 @@ export interface ContentBlock {
 export async function loader({ params }: any) {
   const slug = params["*"] ?? "home";
   const pageData = await getPageBySlug(slug);
+  console.log({ pageData });
 
   if (!pageData) {
     throw new Response("Not Found", { status: 404 });
@@ -41,7 +42,6 @@ export async function loader({ params }: any) {
     }
     return block;
   });
-
 
   return json({
     page: {
