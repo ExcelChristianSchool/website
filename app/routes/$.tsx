@@ -21,6 +21,7 @@ export async function loader({ params }: any) {
   const slug = params["*"] ?? "home";
   const pageData = await getPageBySlug(slug);
   console.log({ pageData });
+  console.log(pageData.Content);
 
   if (!pageData) {
     throw new Response("Not Found", { status: 404 });
@@ -55,8 +56,8 @@ export default function DynamicPage() {
   const { page } = useLoaderData<{ page: Page }>();
 
   return (
-    <div className="h-[100vh] bg-[#F4F4E8]">
-      <div className="w-full flex flex-col gap-4 items-center justify-center bg-neutral-700 h-[150px]">
+    <div className="min-h-[100vh] pb-4 bg-[#F4F4E8] flex flex-col items-center">
+      <div className="w-full flex flex-col gap-4 items-center justify-center mb-4 bg-neutral-700 h-[150px]">
         <h1 className="text-5xl text-white kadwa-regular">{page.Title}</h1>
         <HeaderBreadcrumb />
       </div>
