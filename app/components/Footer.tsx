@@ -24,14 +24,15 @@ const Footer: FC = () => {
   const { contactInfo } = useLoaderData<{ contactInfo: FooterData }>();
 
   const {
-    Name,
-    Address,
-    Phone,
-    Fax,
-    SupportEmail,
-    Accreditations,
+    Name = " ",
+    Address = " ",
+    Phone = " ",
+    Fax = " ",
+    SupportEmail = " ",
+    Accreditations = [],
     MapLink,
-  } = contactInfo;
+} = contactInfo ?? {};
+
 
   // Render accreditations list or a fallback message
   const renderAccreditations = () => (
